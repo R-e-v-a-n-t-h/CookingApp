@@ -1,4 +1,4 @@
-# Cooking App
+# Lazeez
 ## Only The application code is here
 ## ML Part is in the main branch
 
