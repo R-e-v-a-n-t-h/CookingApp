@@ -1,0 +1,113 @@
+/* #whole-page{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+}
+
+#intro{
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+} */
+
+/*----------------------------------------------------------------------------------------------->App Bar Design*/
+.appbar{
+    height:7.15rem;
+    /* height:114px; */
+    width: 100%;
+    background-color: #258425;
+    display:flex;
+    align-items: center;
+    /* justify-content: space-around; */
+    /* padding: 0px 1% 0px 1%; */
+
+
+}
+
+.imgholder{
+    justify-self:flex-start;
+    margin-left: 1%;
+}
+
+img{
+    height: 108px;
+    width: 345px;
+    /* margin-top:0.2%;
+    margin-left:2%; */
+}
+
+.seperator{
+    width: 67%;
+}
+.buttons{
+    background-color: #FA9F42;
+    color: white;
+    font-size:180%;
+    border-style: None;
+    border-radius: 90px;
+    padding: 13% 45% 13% 45%;
+    box-shadow: 8px 4px 10px rgba(59, 59, 59, 0.838) ;
+    transition-timing-function: ease-in-out;
+    
+
+}
+
+.buttons:hover{
+    box-shadow: 8px 4px 10px rgb(59, 59, 59) ;
+    background-color: #ffab58;
+        }
+
+.buttons:active{
+    box-shadow: none;
+    background-color: #fc9c3c;
+}
+
+.buttonholder{
+    justify-self: flex-end;
+}
+/*----------------------------------------------------------------------------------------------->App Bar Design*/
+
+
+/*----------------------------------------------------------------------------------------------->Ingredients/Dishes Window Design*/
+
+.foodpane{
+    display: grid;
+    grid-template-columns:32% auto;
+    grid-template-rows: auto;
+    height:85.198vh;
+    overflow-x:hidden;
+    overflow-y:hidden;
+}
+
+.ingredientspane{
+    background-color:white;
+    color:black;
+    overflow:auto;
+
+
+}
+
+.dishespane{
+    background-color:#EDEDED;
+    overflow:auto;
+
+}
+
+
+
+
+
+*::-webkit-scrollbar {
+	width: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: gray;
+}
+
+/* Firefox */
+.selector {
+		scrollbar-width: none;
+	}
+/*----------------------------------------------------------------------------------------------->Ingredients/Dishes Window Design*/
