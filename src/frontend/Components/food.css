@@ -1,0 +1,135 @@
+/*----------------------------------------------------------------------------------------------->Ingredients/Dishes Window Design*/
+
+.foodpane{
+    display: grid;
+    grid-template-columns:32% auto;
+    grid-template-rows: auto;
+    height:85.198vh;
+    /* overflow-x:hidden;
+    overflow-y:hidden; */
+}
+
+.ingredientspane{
+    background-color:white;
+    color:black;
+    overflow-y:auto;
+    overflow-x:hidden;
+    padding: 30px 20px 20px 20px 
+}
+
+.ingredient{
+    color:#258425;
+    background-color:white;
+    border-color:#258425;
+    border-style:solid;
+    border-radius:90px;
+    font-size:20px;
+    padding:6px;
+    margin:6px;
+    overflow-x:hidden;
+    cursor: pointer;
+}
+
+.ingredient:hover{
+    box-shadow: 0.5px 0.5px 2px rgba(59, 59, 59, 0.838)
+}
+.ingredient:active{
+    box-shadow: 0px 0px 
+}
+
+
+.pickedingredient{
+    color:white;
+    background-color:#258425;
+    border-color:#258425;
+    border-style:solid;
+    border-radius:90px;
+    font-size:20px;
+    padding:6px;
+    margin:10px;
+    overflow-x:hidden;
+    cursor: pointer;
+
+}
+.pickedingredient:hover{
+    box-shadow: 0.5px 0.5px 2px rgba(59, 59, 59, 0.838)
+}
+.pickedingredient:active{
+    box-shadow: 0px 0px 
+}
+
+
+
+
+
+
+.dishespane{
+    background-color:#EDEDED;
+    overflow:auto;
+    padding:20px;
+
+}
+
+
+.ingredientsholder{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+
+.dish{
+    border-style: solid;
+    border-radius: 22px;
+    background-color: white;
+    margin:0px 0px 30px 0px;
+    padding: 10px;
+    box-shadow: 0.5px 0.5px 2px rgba(59, 59, 59, 0.838) ;
+    
+}
+
+
+.dish:hover{
+    cursor: pointer;
+    box-shadow: 01px 0.5px 4px rgba(59, 59, 59, 0.838) ;
+}
+
+.dish:active{
+    background-color: #f1f1f1;
+}
+
+
+.dishIngredientsHolder{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.dishName{
+    font-size:larger;
+    padding-bottom:10px
+}
+
+.dishIngredients{
+    color:#258425;
+    border-color:#258425;
+    border-style:solid;
+    border-radius:90px;
+    padding:4px;
+    margin-right:6px;
+    margin-bottom:6px;
+    overflow-x:hidden;
+}
+
+.pickedDishIngredients{
+    color:white;
+    background-color:#258425;
+    border-color:#258425;
+    border-style:solid;
+    border-radius:90px;
+    padding:5px;
+    margin-right:6px;
+    margin-bottom:6px;
+    overflow-x:hidden;
+}
+
+
+/*----------------------------------------------------------------------------------------------->Ingredients/Dishes Window Design*/
