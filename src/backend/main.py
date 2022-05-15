@@ -12,15 +12,15 @@ import pickle
 app = FastAPI()
 
 
-origins = ["http://localhost:8000"]
+origins = ["*"]
 
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=origins,
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"]
-# )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 
 @app.get('/api')
@@ -33,9 +33,10 @@ async def openingPage():
     allIngredients.pop(0)
     allIngredients.pop(0)
     indecies = {}
+    dishes = np.array(data["title"]).tolist()
     for i in range(len(allIngredients)):
         indecies[allIngredients[i]] = i
-    return {"ingredients": allIngredients, "indecies": indecies}
+    return {"ingredients": allIngredients, "indecies": indecies, "dishes": dishes}
 
 
 @app.get("/api/required-ingredients")

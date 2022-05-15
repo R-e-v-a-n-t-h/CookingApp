@@ -69,31 +69,6 @@ img{
 /*----------------------------------------------------------------------------------------------->App Bar Design*/
 
 
-/*----------------------------------------------------------------------------------------------->Ingredients/Dishes Window Design*/
-
-.foodpane{
-    display: grid;
-    grid-template-columns:32% auto;
-    grid-template-rows: auto;
-    height:85.198vh;
-    overflow-x:hidden;
-    overflow-y:hidden;
-}
-
-.ingredientspane{
-    background-color:white;
-    color:black;
-    overflow:auto;
-
-
-}
-
-.dishespane{
-    background-color:#EDEDED;
-    overflow:auto;
-
-}
-
 
 
 
@@ -110,4 +85,3 @@ img{
 .selector {
 		scrollbar-width: none;
 	}
-/*----------------------------------------------------------------------------------------------->Ingredients/Dishes Window Design*/
