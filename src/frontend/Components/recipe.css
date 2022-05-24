@@ -1,0 +1,51 @@
+.recipewindow{
+    height:85.198vh;
+    width:100%;
+    background-color:#EDEDED;
+    display:flex;
+    /* align-items:center; */
+    flex-direction:column;
+    padding:30px;
+
+    
+}
+
+.dishTitle{
+    align-self: center;
+    font-size:40px
+}
+
+.title{
+    padding:0px 0px 10px 0px;
+    align-self: center;
+    font-size:30px
+
+     
+}
+
+.dishHolder{
+    align-self: flex-start;
+    border-radius:3px;
+    padding: 0px 20px 0px 20px;
+    margin-top:10px;
+    margin-bottom:10px;
+    width: 100%;
+    height: 100%;
+    background-color:white;
+    box-shadow: 2px 2px 8px rgba(59, 59, 59, 0.838);
+    display:flex;
+    flex-direction:column;
+    font-size:larger;
+    overflow: auto;
+}
+
+.details{
+    padding-bottom:10px;
+}
+
+
+
+
+ul{
+    list-style-type:circle
+}

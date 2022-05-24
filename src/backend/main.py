@@ -1,5 +1,5 @@
 # BACKEND IMPORTS
-from database import *
+from condition import *
 from fastapi import FastAPI, Path, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -42,20 +42,25 @@ async def openingPage():
 @app.get("/api/required-ingredients")
 async def requiredIngredients():
     data = pd.read_csv('Cleaned_Data.csv')
+    # data.drop_duplicates()
     ner = np.array(data["NER"]).tolist()
     x = np.array(data["title"]).tolist()
     for i in range(len(ner)):
         ner[i] = ast.literal_eval(ner[i])
     ingredients = {}
     for i in range(len(x)):
-        ingredients[x[i]] = ner[i]
+        if x[i] not in ingredients:
+            ingredients[x[i]] = ner[i]
     return ingredients
 
 
-@app.get("/api/specific-recipes/{dish}")
-async def recipes(dish):
+@app.post("/api/specific-recipes")
+async def recipes(request: Request):
     data = pd.read_csv('Cleaned_Data.csv')
-    requestedData = data.loc[data["title"] == dish]
+    if request:
+        params = await request.json()
+        dish = params["dish"]
+    requestedData = data.loc[data["title"].str.contains(dish, regex=False)]
     directions = ast.literal_eval(
         np.array(requestedData["directions"]).tolist()[0])
     ingredients = ast.literal_eval(
@@ -81,10 +86,12 @@ async def predict(request: Request):
     if request:
         params = await request.json()
         X = params["array"]
+        picked = params["chosenIngredients"]
 
         if len(X) == len(allIngredients):
             predictions = model.kneighbors(np.array([X]))
             predictedData = data.iloc[predictions[1][0]]
+            predictedData = classifier(predictedData, picked)
             sendData = np.array(predictedData["title"]).tolist()
             return {"predictions": sendData}
         else:

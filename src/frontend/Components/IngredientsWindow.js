@@ -1,7 +1,10 @@
 import React,{useState,useEffect} from 'react'
+import {Link} from "react-router-dom";
+
 import logo from "./lazeez.svg"
 import axios from "axios"
 import "./food.css"
+
 
 function IngredientsWindow() {
 
@@ -14,12 +17,16 @@ function IngredientsWindow() {
 
 
     const [dishes,setDishes]= useState([])
-    const [reset,setReset]=useState(0)
 
     const [numberOfIngredients,setNumberOfIngredients]=useState(Number(0))
 
+    const [chosenIngredients,setChosenIngredints]=useState(new Set())
 
+    const coloring={
+      0: "dishIngredients",
+      1:"pickedDishIngredients"
 
+    }
 
 
     
@@ -27,12 +34,12 @@ function IngredientsWindow() {
    const getData = async () => {
     await axios.get("http://127.0.0.1:8000/api").then(response => {
     setIngredients(response.data.ingredients)
-    setFakeIngredients(response.data.ingredients)
+    setFakeIngredients((response.data.ingredients)/*.sort((a, b) => 0.5 - Math.random())*/)
     setIndecies(response.data.indecies)
     setDishes(response.data.dishes)
     setInputArray(new Array(response.data.ingredients.length).fill(0))
     setNumberOfIngredients(0)
-    console.log(numberOfIngredients)
+    setChosenIngredints(new Set())
    }
     )
   };
@@ -47,19 +54,27 @@ function IngredientsWindow() {
 
 
 
-  const ingredientClicked = async (dish) => {
+  const ingredientClicked = async (ingredient) => {
 
-    const position = indecies[dish]
+    const position = indecies[ingredient]
     var x = numberOfIngredients
     
     if (inputArray[position] === 0){
       inputArray[position] = 1
+
+      chosenIngredients.add(ingredient)
+      
+      setChosenIngredints(chosenIngredients)
       
       setNumberOfIngredients((self)=>{
         return self+1
       })
     }else{
       inputArray[position] = 0
+
+      chosenIngredients.delete(ingredient)
+      setChosenIngredints(chosenIngredients)
+
       setNumberOfIngredients((self)=>{
         return self-1})
     }
@@ -68,8 +83,6 @@ function IngredientsWindow() {
     // inputArray[position] = Number(!(inputArray[position]))
     setInputArray(inputArray)
     console.log(inputArray)
-    console.log(numberOfIngredients)
-
 
 
     if ( JSON.stringify(inputArray)==JSON.stringify(Array(inputArray.length).fill(Number(0)))){
@@ -78,12 +91,24 @@ function IngredientsWindow() {
     }
     else{
        
-        await axios.post("http://127.0.0.1:8000/api/predict",{array:inputArray})
+        await axios.post("http://127.0.0.1:8000/api/predict",{array:inputArray,chosenIngredients:Array.from(chosenIngredients)})
           .then(response=>{setDishes(response.data.predictions)})
     }
     
   }
 
+
+const handleIngredientClick= (e) =>{
+
+  var temp = e.target.style.color
+  e.target.style.color=e.target.style.backgroundColor
+  e.target.style.backgroundColor=temp
+  
+  ingredientClicked(e.target.innerText)
+  // console.log(e)
+
+
+}
 
 
   
@@ -94,7 +119,7 @@ function IngredientsWindow() {
 
   useEffect(() => {
     getData();
-  },[reset]);
+  },[]);
 
 
 
@@ -111,7 +136,7 @@ function IngredientsWindow() {
         <div className={"appbar container-fluid"}>
             <div className = "imgholder"><img src ={logo} alt="lazeez"/></div>
             <div className="seperator"></div>
-            <div className="buttonholder"><button className={"buttons"} onClick={()=>{setReset(!reset)}}>{"Reset"}</button></div>
+            <div className="buttonholder"><button className={"buttons"} onClick={() => window.location.reload(false)}>{"Reset"}</button></div>
         </div>
 
 
@@ -120,26 +145,26 @@ function IngredientsWindow() {
             
             
             <div className={"ingredientspane"}>
-              <div>SearchBar</div>
+
               <div className={"ingredientsholder"}>
                 {fakeIngredients.map((x)=>{
-                  return (<div className="ingredient" onClick={()=>{ingredientClicked(x)}}>{x}</div>)
+                  return (<div className="ingredient"  style={{color:"#258425",backgroundColor:"white"}} onClick={handleIngredientClick}>{x}</div>)
                 })}
               </div>
             </div>
 
 
-
             <div className={"dishespane"}>
               {dishes.map((x)=>{
-                  return (
+                  return (<Link  style={{textDecoration: "none"}} to={`/recipe?dish=${x}`} target='_blank'>
                   <div className="dish">
                         <div className="dishName">{x}</div>
                         <div className="dishIngredientsHolder">
-                              {requiredIngredients[`${x}`].map((y)=>{return (<div className="dishIngredients">{y}</div>) })}
+                              {((requiredIngredients[`${x}`]===undefined)?[]:requiredIngredients[`${x}`]) .map((y)=>{return (
+                              <div className={coloring[inputArray[indecies[y]]]!=undefined?coloring[inputArray[indecies[y]]]:"dishIngredients"}>{y}</div>) })}
                         </div>
                   </div>
-                  )
+                  </Link>)
               })}
                 
             </div>
