@@ -161,7 +161,7 @@ const handleIngredientClick= (e) =>{
                         <div className="dishName">{x}</div>
                         <div className="dishIngredientsHolder">
                               {((requiredIngredients[`${x}`]===undefined)?[]:requiredIngredients[`${x}`]) .map((y)=>{return (
-                              <div className={coloring[inputArray[indecies[y]]]!=undefined?coloring[inputArray[indecies[y]]]:"dishIngredients"}>{y}</div>) })}
+                              <div className={coloring[inputArray[indecies[y.toLowerCase()]]]!=undefined?coloring[inputArray[indecies[y.toLowerCase()]]]:"dishIngredients"}>{y}</div>) })}
                         </div>
                   </div>
                   </Link>)
